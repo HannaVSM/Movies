@@ -1,0 +1,32 @@
+{% extends "./base.html" %}
+
+{% block title %} Editar película {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar película</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="../e-movie/{{movie.id}}" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtTitle" name="txtTitle" value="{{movie.title}}" class="form-control" placeholder="Título"
+                            maxlength="50" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtCountry" name="txtCountry" value="{{movie.country}}" class="form-control" placeholder="País"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="numRating" name="numRating" value="{{movie.rating}}" class="form-control" min="1" max="10"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

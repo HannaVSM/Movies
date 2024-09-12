@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Movies {% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2> Gestión de películas</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="c-movie/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtTitle" name="txtTitle" class="form-control" placeholder="Título"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtCountry" name="txtCountry" class="form-control" placeholder="Country"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="numRating" name="numRating" class="form-control" min="1" max="10"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8"></div>
+    <h1> Listado de películas</h1>
+    <div class="table-responsive py-2">
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Country</th>
+                    <th>Rating</th>
+                    <th colspan="2">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in movies %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{m.title}}</td>
+                    <td>{{m.country}}</td>
+                    <td>{{m.rating}}</td>
+                    <td>{{m.id}}</td>
+                    <td><a href="er-movie/{{m.id}}" class="btn btn-info">Editar</a></td>
+                    <td><a href="d-movie/{{m.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+{%endblock%}
